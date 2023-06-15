@@ -31,6 +31,7 @@ const favicon = require('serve-favicon')
 const oneDayInMilis = 1000*60*60*24
 const oneDayInSeconds = 24*3600
 const dbUrl = process.env.dbUrl //prod
+console.log(dbUrl)
 // const dbUrl = 'mongodb://127.0.0.1:27017/yelpCamp' //dev
 const helmetConfig = require('./static/js/utils/security/helmetConfig.js')
 const store = mongoStore.create({
@@ -41,9 +42,10 @@ const store = mongoStore.create({
     }
 })
 const sessionOptions = {
-    store,
+    store: store,
 	saveUninitialized: false,
     secret:process.env.sessionSecret,
+    resave: false,
     cookie: {
         name: 'ycSession',
         expires: Date.now() + oneDayInMilis,
