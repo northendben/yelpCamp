@@ -101,8 +101,8 @@ app.use('', authRoutes)
 
 main().catch(err => console.log(err, 'Your connection failed'));
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/yelpCamp')
-    // await mongoose.connect(dbUrl)
+    // await mongoose.connect('mongodb://127.0.0.1:27017/yelpCamp')
+    await mongoose.connect(dbUrl)
     console.log('Connected')
 }
 
