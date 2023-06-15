@@ -1,5 +1,5 @@
     <%layout ('layouts/boilerplate')%>
-    <div class="container-fluid d-flex">
+    <div class="container-fluid d-flex px-0">
         <a href="/campgrounds" class="index-link-styling"><h1>All Campgrounds</h1></a>
         <form class="ms-auto" action="/campgrounds/search?">
                 <input class="form-control" name="q" id="campSearchEntry" placeholder="Search">
@@ -7,19 +7,19 @@
         </form>
     </div>
     <%if(campGrounds.length > 0){ %>
-        <ul>
+        <ul class="allCampListing px-0">
             <div id="campMap" class="mx-auto mb-2 mt-3"></div>
             <% for(let campground of campGrounds) { %>
                 <div class="card mb-2">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <%if(campground.images.length > 0) {%>
                             <img src="<%=campground.images[0].url%>" alt="" class="img-fluid">
                             <% } else { %>
                             <img src="" alt="No Image Available" class="img-fluid">
                             <% } %>
                         </div>
-                        <div class="col-8">
+                        <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title mb-0"><%=campground.title%></h5>
                                 <div class="card-text mb-2">
@@ -27,9 +27,11 @@
                                         <%=campground.location%>
                                     </small>
                                 </div>
-                                <%for(let textGroup of campground.description.split('\n')) { %>
-                                    <div class="card-text"><%=textGroup%></div>
-                                    <% } %>
+                                <div class="description-text">
+                                    <%for(let textGroup of campground.description.split('\n')) { %>
+                                        <p class="card-text"><%=textGroup%></p>
+                                        <% } %>
+                                </div>
                                 <a href="/campgrounds/<%=campground._id%>" class="btn btn-sm btn-primary mt-4">View <%=campground.title%></a>
                             </div>
                         </div>

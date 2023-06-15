@@ -1,6 +1,6 @@
 <%layout ('layouts/boilerplate')%>
     <div class="row">
-        <div class="col-6 offset-3">
+        <div class="col-md-6 offset-md-3">
             <h1>Add a new campground</h1>
             <form action="/campgrounds/new" id="new-camp-form" class="new-camp-form form-to-validate" method="POST" novalidate enctype="multipart/form-data">
                 <div class="mb-2">
@@ -36,7 +36,7 @@
                     <div class="invalid-feedback">Every campground must have a location. Please fill out this field</div>
                 </div>
             </form>
-            <button class="btn btn-sm btn-outline-success mt-2" id="newCampSubmit">Add Campground</button>
+            <button class="btn btn-sm btn-outline-success my-3" id="newCampSubmit">Add Campground</button>
         </div>
     </div>
     <script src="/js/newCampHelpers.js"></script>

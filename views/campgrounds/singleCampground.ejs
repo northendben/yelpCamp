@@ -41,8 +41,8 @@
                 </ul>
                 <% if((foundCampground.creator && authenticatedUser && foundCampground.creator.toString() === authenticatedUser._id.toString()) || authenticatedUser && authenticatedUser.isAdmin == true) { %>
                     <div class="card-button-container d-flex justify-content-center my-2">
-                        <a class="btn btn-sm btn-outline-success w-25 mx-3" id="editCampSubmit" href="/campgrounds/<%=foundCampground._id%>/edit">Update Campground</a>
-                        <button class="btn btn-sm btn-outline-danger w-25 mx-3" id="editCampDelete">Delete Campground</button>
+                        <a class="btn btn-sm btn-outline-success w-25 mx-3 d-flex justify-content-center align-items-center" id="editCampSubmit" href="/campgrounds/<%=foundCampground._id%>/edit">Update Campground</a>
+                        <button class="btn btn-sm btn-outline-danger w-25 mx-3 d-flex justify-content-center align-items-center" id="editCampDelete">Delete Campground</button>
                     </div>
                 <% } %>
                 <div class="card-footer">

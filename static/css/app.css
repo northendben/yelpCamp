@@ -121,3 +121,21 @@ button#getStarted:hover{
     text-decoration: none;
 
 } */
+
+.allCampListing .description-text {
+    width: 100%;
+    /* this code clamps based on specified lines */
+    overflow: hidden;
+   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  display: -webkit-box!important;
+}
+
+.card-button-container {
+    height: 50px;
+}
+@media screen and (max-width:768px) {
+    #editCampSubmit, #editCampDelete {
+        width: 50%!important;
+    }
+}
