@@ -30,8 +30,8 @@ const flash = require('connect-flash');
 const favicon = require('serve-favicon')
 const oneDayInMilis = 1000*60*60*24
 const oneDayInSeconds = 24*3600
-// const dbUrl = process.env.dbUrl //prod
-const dbUrl = 'mongodb://127.0.0.1:27017/yelpCamp' //dev
+const dbUrl = process.env.dbUrl //prod
+// const dbUrl = 'mongodb://127.0.0.1:27017/yelpCamp' //dev
 const helmetConfig = require('./static/js/utils/security/helmetConfig.js')
 const store = mongoStore.create({
     mongoUrl: dbUrl,
@@ -107,13 +107,6 @@ async function main() {
 }
 
 app.get('/', async (req,res) =>{
-    console.log(helmetConfig.allowedFontSources)
-    console.log(securityHelmet.contentSecurityPolicy.getDefaultDirectives())
-    // console.log(req.path)
-    // console.log(req.session)
-    // console.log(req.user)
-    // const fcg = await Campground.findById('640a712ef715335a122dd191').select('creator')
-    // console.log(fcg)
     res.render('home')
 })
 
@@ -127,9 +120,7 @@ app.all('*', (req,res,next) => {
 })
 
 app.use((err, req,res,next)=>{
-    console.log(err)
     err=determineError(err,req,res,next)
-    console.log(err)
     if(err.render === true){
         res.render('errors/errors', {error: err, templateBuilder: templateBuilder})
     } else {
