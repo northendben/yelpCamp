@@ -107,13 +107,6 @@ async function main() {
 }
 
 app.get('/', async (req,res) =>{
-    console.log(helmetConfig.allowedFontSources)
-    console.log(securityHelmet.contentSecurityPolicy.getDefaultDirectives())
-    // console.log(req.path)
-    // console.log(req.session)
-    // console.log(req.user)
-    // const fcg = await Campground.findById('640a712ef715335a122dd191').select('creator')
-    // console.log(fcg)
     res.render('home')
 })
 
@@ -127,9 +120,7 @@ app.all('*', (req,res,next) => {
 })
 
 app.use((err, req,res,next)=>{
-    console.log(err)
     err=determineError(err,req,res,next)
-    console.log(err)
     if(err.render === true){
         res.render('errors/errors', {error: err, templateBuilder: templateBuilder})
     } else {
