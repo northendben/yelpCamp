@@ -30,8 +30,7 @@ const flash = require('connect-flash');
 const favicon = require('serve-favicon')
 const oneDayInMilis = 1000*60*60*24
 const oneDayInSeconds = 24*3600
-const dbUrl = process.env.dbUrl //prod
-console.log(dbUrl)
+const dbUrl = process.env.dbURL //prod
 // const dbUrl = 'mongodb://127.0.0.1:27017/yelpCamp' //dev
 const helmetConfig = require('./static/js/utils/security/helmetConfig.js')
 const store = mongoStore.create({
