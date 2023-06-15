@@ -1,0 +1,24 @@
+<%layout ('layouts/boilerplate-error')%>
+<div class="container-fluid" id="error-page-background">
+</div>
+<div class="container d-flex flex-column justify-content-center align-items-center h-100" id="error-page-viewport">
+    <% if (templateBuilder.notFound.includes(error.status)) { %>
+        <p class="fs-3 m-1 secondary-error-text">Error code:<%=error.status%>-- <%=error.message%></p>
+        <p class="fs-1 text-light m-1">Not all who wander are lost...</p>
+        <p class="fs-1 text-light m-1">but this page seems to be.</p>
+        <p class="fs-5 secondary-error-text mt-4">Please let us know if you think this is an error</p>
+    <% } else if(templateBuilder.client.includes(error.status)) { %>
+        <p class="fs-3 m-1 secondary-error-text">Error Code: <%=error.status%>--<%=error.message%></p>
+        <p class="fs-1 text-light m-1">Well this is awkard...</p>
+        <p class="fs-1 text-light m-1">but something went wrong with that request.</p>
+        <p class="fs-5 secondary-error-text mt-4">Please let us know if you think this is an error</p>
+    <% } else { %>
+        <p class="fs-3 m-1 secondary-error-text">Error code: <%=error.status%>-- <%=error.message%></p>
+        <p class="fs-1 text-light m-1">Uh oh....</p>
+        <p class="fs-1 text-light m-1">Something went wrong on our side.</p>
+        <p class="fs-5 secondary-error-text mt-4">Please try again, and contact support if this persists</p>
+        <% } %>
+
+</div>
+
+

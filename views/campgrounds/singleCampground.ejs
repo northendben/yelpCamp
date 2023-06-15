@@ -1,0 +1,122 @@
+<%layout ('layouts/boilerplate-reviews')%>
+    <div class="row">
+        <div class="col-md-6 offset-md-3 mb-3">
+            <div class="card">
+                <div id="image-carousel" class="carousel slide">
+                    <%if(foundCampground.images.length > 1){%>
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#image-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <%for(let i = 1; i < foundCampground.images.length; i++) { %>
+                                <button type="button" data-bs-target="#image-carousel" data-bs-slide-to="<%=i%>" aria-label="<%=i%>"></button>
+                            <%}%>
+                        </div>
+                        <% } %> 
+                    <div class="carousel-inner">
+                        <% for(let i = 0; i < foundCampground.images.length; i++) { %>
+                            <%if(i === 0) { %>
+                                <div class="carousel-item active">
+                                    <img class="card-img-top" src="<%=foundCampground.images[i].url%>">
+                                </div>     
+                            <% } else  { %>
+                                <div class="carousel-item">
+                                    <img class="card-img-top" src="<%=foundCampground.images[i].url%>">
+                                </div>
+                            <%}%>
+                                <!-- <img class="card-img-top" src="" alt="A camping image"> -->
+                        <% } %>
+                      </div>
+                </div>
+                <div class="card-body">
+                    <h5 id="title" data-db-id="<%=foundCampground._id%>" class="card-title"><%=foundCampground.title%></h5>
+                    <%for(let textGroup of foundCampground.description.split('\n')) {%>
+                        <p class="camp-description card-text"><%=textGroup%></p>
+                    <%}%>
+                </div>
+                <ul class="list-group list-group flush">
+                    <li class="list-group-item text-muted"><%=foundCampground.location%></li>
+                    <li class="list-group-item">$<%=foundCampground.price%>/night</li>
+                    <div class="my-2 mx-1">
+                        <div id='campMap'></div>
+                    </div>
+                </ul>
+                <% if((foundCampground.creator && authenticatedUser && foundCampground.creator.toString() === authenticatedUser._id.toString()) || authenticatedUser && authenticatedUser.isAdmin == true) { %>
+                    <div class="card-button-container d-flex justify-content-center my-2">
+                        <a class="btn btn-sm btn-outline-success w-25 mx-3" id="editCampSubmit" href="/campgrounds/<%=foundCampground._id%>/edit">Update Campground</a>
+                        <button class="btn btn-sm btn-outline-danger w-25 mx-3" id="editCampDelete">Delete Campground</button>
+                    </div>
+                <% } %>
+                <div class="card-footer">
+                    <%if(typeof foundCampground.createdAt != undefined && foundCampground.createdAt) {%>
+                            <%const today = new Date()%>
+                            <%const dbDate = foundCampground.createdAt%>
+                            <%const oneDayInMillis = 1000*60*60*24%>
+                            <%const d = dbDate.getTime()%>
+                            <%const dayDifference = Math.ceil((today.getTime()-dbDate.getTime()) /oneDayInMillis)%>
+                            <p class="text-muted"><%=dayDifference%> days ago</p>
+                    <%} else { %>
+                        <p class="text-muted">Long, Long Ago...</p>
+                    <%}%>
+                </div>
+            </div>
+            <div class="reviews-container pt-3">
+                <h5 class="review-header">Reviews</h5>
+                <%if (foundCampground.reviews.length < 1) {%>
+                    <h6>No reviews yet</h6>
+                <%}%>
+                <% if (foundCampground.reviews.length >0) { %>
+                    <%for(let review of foundCampground.reviews) { %>
+                        <div class="card single-review p-2 mb-3" data-review-id=<%=review._id%>>
+                            <%if(authenticatedUser && authenticatedUser.isAdmin || (authenticatedUser && review.author && authenticatedUser._id.toString() === review.author.toString())) {%>
+                                <span class="review-trash-icon text-danger position-absolute"><i class="fa-solid fa-trash fa-sm"></i></span>
+                                <% } %>
+                            <p class="review-result starability-result mb-0" data-rating =<%=review.rating%>></p>
+                            <%if(review.author && review.author.username) { %>
+                                <p class="review-username mx-1 text-muted fw-bold mb-1"><%=review.author.username%></p>
+                            <% } %>
+                            <p class="card-text mx-1"><%=review.body%></p>
+                        </div>
+                <% } %>
+                <% }%>
+                <div class="hide success-msg text-center"><h5 class="text-success">Your review has been saved</h5></div>
+                <div class="review-submission-container">
+                    <h6>Review Campground:</h6>
+                    <% if(authenticatedUser) { %>
+                        <form action="#" id="reviewForm" class="form-to-validate">
+                            <fieldset class="starability-basic">
+                                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="rating" value="1" />
+                                <label for="first-rate1" data-rating-score =1 title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="rating" value="2" />
+                                <label for="first-rate2" data-rating-score =2 title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="rating" value="3" />
+                                <label for="first-rate3" data-rating-score =3 title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="rating" value="4" />
+                                <label for="first-rate4" data-rating-score =4 title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="rating" value="5" />
+                                <label for="first-rate5" data-rating-score =5 title="Amazing">5 stars</label>
+                            </fieldset>
+                            <div class="invalid-feedback" id="requireRatingMsg">Every review must have a rating of 1-5 stars.</div>
+                            <textarea required class="form-control" name="reviewBody" id="reviewFormBody" cols="80" rows="10"></textarea>
+                            <div class="invalid-feedback">Every review must have a reason for the review. Please fill out this field before submitting.</div>
+                        </form>
+                        <button class="btn btn-sm btn-outline-success mt-2 mb-2" id="reviewSubmitBtn">Submit Review</button>
+                    <% } else { %>
+                        <h6>Please sign in to leave a review</h6> 
+                        <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>const mbToken = '<%-process.env.mapBoxToken%>'</script>
+    <script>
+        <%if(foundCampground.geometry.coordinates.length > 0){%>
+            const campCoordinates = [<%-foundCampground.geometry.coordinates%>]
+            const renderPin = true
+        <%} else {%>
+            const renderPin = false
+            const campCoordinates = ['-98.58333333333333','39.833333333333336']
+        <%}%>
+    </script>
+    <script>const now = new Date(); const dbTime = "<%=foundCampground.createdAt%>"</script>
+    <script src="/js/showCampHelpers.js"></script>
+   

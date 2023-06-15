@@ -1,0 +1,21 @@
+<% layout('layouts/boilerplate-login')%>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card px-3 pb-4 pt-3">
+                <h3 class="card-title mb-3">Login</h3>
+                <form action="/login?prevPage=<%=prevPage%>" id="userLoginForm" class="form-to-validate" method="POST" novalidate>
+                    <div class="mb-2 field-container">
+                        <label class ="form-label" for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <div class="invalid-feedback">Username cannot be blank</div>
+                    </div>
+                    <div class="mb-2 field-container">
+                        <label class ="form-label" for="username">Password</label>
+                        <input type="password" minlength="8" class="form-control" id="password" name="password" required>
+                        <div class="invalid-feedback">Please enter a password </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-success mt-2" id="loginSubmit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>

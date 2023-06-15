@@ -1,0 +1,42 @@
+<%layout ('layouts/boilerplate')%>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1>Add a new campground</h1>
+            <form action="/campgrounds/new" id="new-camp-form" class="new-camp-form form-to-validate" method="POST" novalidate enctype="multipart/form-data">
+                <div class="mb-2">
+                    <label class="form-label" for="newCampTitle">Campground Title</label>
+                    <input class ="form-control" type="text" name="newCampTitle" id="newCampTitle" required>
+                    <div class="invalid-feedback">Every campground must have a title. Please fill out this field.</div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="newCampPrice">Campground Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input class ="form-control" type="number" name="newCampPrice" id="newCampPrice" placeholder="0" required>
+                        <div class="invalid-feedback">Every campground must have a price equal to or greater than zero. Please fill out this field.</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label for="newCampDescription">Campground Description</label>
+                    <textarea class="form-control" name="newCampDescription" id="newCampDescription" cols="50" rows="10" required></textarea>
+                    <div class="invalid-feedback">Every campground must have a description. Please fill out this field</div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="campImg">Image</label>
+                    <input class ="form-control form-control-sm" type="file" name="campImg" id="newCampImg" multiple>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="campCity">City</label>
+                    <input class ="form-control" type="text" name="campCity" id="campCity" required>
+                    <div class="invalid-feedback">Every campground must have a location. Please fill out this field</div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="campState">State</label>
+                    <input class ="form-control" type="text" name="campState" id="campState" required>
+                    <div class="invalid-feedback">Every campground must have a location. Please fill out this field</div>
+                </div>
+            </form>
+            <button class="btn btn-sm btn-outline-success mt-2" id="newCampSubmit">Add Campground</button>
+        </div>
+    </div>
+    <script src="/js/newCampHelpers.js"></script>

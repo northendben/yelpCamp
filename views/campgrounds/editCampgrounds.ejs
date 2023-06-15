@@ -1,0 +1,52 @@
+<%layout ('layouts/boilerplate')%>
+<div class="msg-container d-flex justify-content-center align-items-center d-none" id="msg-container">
+    <p class="text-success fw-bold fs-5 d-none" id="success-msg">Campground Updated Successfully</p>
+    <p class="text-danger fw-bold fs-5 d-none" id="error-msg">Error Updating Campground</p>
+</div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <h1>Edit Campground</h1>
+            <h3>Images</h3>
+            <a class="btn btn-sm btn-outline-success w-25 my-2" id="manageImageButton" href="/campgrounds/<%=foundCampground._id%>/edit/images">Manage Images</a>
+            <div class="image-manage-container d-flex col-12 flex-wrap mb-2">
+                <%for(let image of foundCampground.images){%>
+                    <div class="small-edit-image-container my-2">
+                        <img src="<%=image.thumbnail%>" alt="" class="img-fluid img-thumbnail px-2 py-2" data-db-id="<%=image._id%>">
+                    </div>
+                <%}%>     
+            </div>
+            <h3>Camp Information</h3>
+            <form action="" id="edit-camp-form" class="edit-camp-form form-to-validate mx-2" data-db-id="<%=foundCampground._id%>" novalidate>
+                <div class="mb-2">
+                    <label class="form-label" for="editCampTitle">Campground Title</label>
+                    <input class="form-control" type="text" name="title" id="editCampTitle" value="<%=foundCampground.title%>" required>
+                    <div class="invalid-feedback">Every campground must have a title. Please fill out this field.</div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="editCampPrice">Campground Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input class="form-control" type="number" name="price" id="editCampPrice" value="<%=foundCampground.price%>" required>
+                        <div class="invalid-feedback">Every campground must have a price equal to or greater than zero. Please fill out this field.</div>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="editCampDescription">Campground Description</label>
+                    <textarea class="form-control" name="description" id="editCampDescription" cols="50" rows="10" required><%=foundCampground.description%></textarea>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="campCity">City</label>
+                    <input class="form-control" type="text" name="campCity" id="campCity" value="<%=foundCampground.location.split(',')[0]%>" required>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="campState">State</label>
+                    <input class="form-control" type="text" name="campState" id="campState" value="<%=foundCampground.location.split(',')[1].trim()%>" required>
+                </div>
+            </form>
+            <div class="row my-3 justify-content-center">
+                <button class="btn btn-sm btn-outline-success w-25 mx-3" id="editCampSubmit">Update Campground</button>
+                <button class="btn btn-sm btn-outline-danger w-25 mx-3" id="editCampDelete">Delete Campground</button>
+            </div>
+        </div>
+    </div>
+    <script src="/js/editCampHelpers.js"></script>

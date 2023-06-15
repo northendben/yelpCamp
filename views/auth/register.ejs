@@ -1,0 +1,37 @@
+<% layout('layouts/boilerplate-login')%>
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card px-3 pb-4 pt-3">
+            <h3 class="card-title mb-3">Register</h3>
+            <form action="" id="userRegistrationForm" class="form-to-validate" novalidate>
+                <div class="mb-2 field-container">
+                    <label class ="form-label" for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                    <div class="invalid-feedback">You must choose a unique username.</div>
+                </div>
+                <div class="mb-2 field-container">
+                    <label class ="form-label" for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                    <div class="invalid-feedback">You must enter a first name.</div>
+                </div>
+                <div class="mb-2 field-container">
+                    <label class ="form-label" for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                    <div class="invalid-feedback">You must enter a last name.</div>
+                </div>
+                <div class="mb-2 field-container">
+                    <label class ="form-label" for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="invalid-feedback">You must enter a valid e-mail address.</div>
+                </div>
+                <div class="mb-2 field-container">
+                    <label class ="form-label" for="username">Password</label>
+                    <input type="password" minlength="8" class="form-control" id="password" name="password" required>
+                    <div class="invalid-feedback">Your password is invalid. Please choose a password that is between 8 and 24 characters long, and meets 3 of the following requirements: 1 uppercase character, 1 lowecase character, 1 number, 1 special character from the following: +!@#$%^&*? </div>
+                </div>
+            </form>
+            <button class="w-25 btn btn-sm btn-outline-success mt-2" id="newUserSubmit">Create Account</button>
+        </div>
+    </div>
+</div>
+<script src="/js/utils/registerHelpers.js"

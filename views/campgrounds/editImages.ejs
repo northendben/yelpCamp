@@ -1,0 +1,31 @@
+<%layout ('layouts/boilerplate')%>
+<div class="msg-container d-flex justify-content-center align-items-center d-none" id="msg-container">
+    <p class="text-success fw-bold fs-5 d-none" id="success-msg">Campground Updated Successfully</p>
+    <p class="text-danger fw-bold fs-5 d-none" id="error-msg">Error Updating Campground</p>
+</div>
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <h1>Manage Images</h1>
+            <div class="image-manage-container d-flex col-12 flex-wrap">
+                <%for(let image of foundCampground.images){%>
+                    <div class="small-edit-image-container my-2">
+                        <img src="<%=image.thumbnail%>" alt="" class="img-fluid img-thumbnail px-2 py-2" data-db-id="<%=image._id%>" data-filename="<%=image.filename%>" data-camp-id="<%=foundCampground._id%>">
+                    </div>
+                <%}%>     
+            </div>
+            <button class="hide btn btn-sm btn-outline-danger w-25 my-2" id="imageDeleteButton">Delete Images</button>
+            <form action="" class="add-image">
+                <h3 class="mt-2">Add New Images</h3>
+                <label class="form-label" for="campImg">Image</label>
+                <input class ="form-control form-control-sm" type="file" name="campImg" id="newCampImg" multiple>
+            </form>
+            <div class="row my-3">
+                <button class="btn btn-sm btn-outline-success w-25 hide" id="addImageSubmit">Save New Images</button>
+            </div>
+        </div>
+    </div>
+<script src="/js/editImageHelpers.js"></script>
+<script>
+    const idToUpdate = "<%=foundCampground._id%>";
+    const campTitle = "<%=foundCampground.title%>";
+</script>

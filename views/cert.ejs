@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wrapper {
+        display: flex;
+        justify-content:center;
+        align-items:center;
+        max-height: 1366px;
+        max-width: 768px;
+        }
+        .cert-container {
+   padding: 10px;
+    background-image: url('/images/CPRCERT.png');
+    background-size:contain;
+    background-repeat: no-repeat;
+    height:75vh;
+    width:75vw;
+    z-index:-10000000
+        }
+
+    .date {
+    position: absolute;
+    right: 43%;
+    font-size: 32px;
+    top: 32%;
+}
+
+.student-name {
+    position: absolute;
+    top: 14%;
+    right: 45%;
+    font-size: 36px;
+}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+    <div class="cert-container">
+        <% if (name) { %>
+            <p class="student-name"><%=name%></p>
+            <p class="date"><%=date%></p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>
