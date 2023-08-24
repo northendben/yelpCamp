@@ -5,7 +5,7 @@ console.log(process.env.cloudinaryAPIKey)
 console.log(process.env.cloudinarySecret)
 cloudinary.config({
     cloud_name: process.env.cloudinaryCloudName,
-    api_key: process.env.CloudinaryAPIKey,
+    api_key: 273219763724316,
     api_secret: process.env.cloudinarySecret
 })
 console.log(cloudinary.cloudinary_js_config())
