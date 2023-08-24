@@ -129,7 +129,7 @@ app.use((err, req,res,next)=>{
     } else {
         console.log('hitting here ben')
         console.log(err)
-        res.status(err.status).send(JSON.stringify(err.message))
+        res.status(err.status).send({message: err.message, status:err.status})
     }
 })
 
