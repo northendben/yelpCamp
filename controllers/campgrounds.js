@@ -61,7 +61,6 @@ const updateCampground = async (req,res) => {
         req.flash('successMessage', 'Campground Updated')
         res.status(200).send({"msg": updatedCamp})
     } catch (e) {
-        console.log(e)
         res.status(500).send(e)
     }
 }
@@ -91,8 +90,6 @@ const updateCampImages = async (req,res) => {
     const {id} = req.params
     const foundCampground = await Campground.findById(id)
     const images = req.files.map((file) => ({filename: file.filename, url: file.path}))
-    console.log('here')
-    console.log(images)
     foundCampground.images.push(...images)
     await foundCampground.save()
     req.flash('successMessage', 'Images added')
@@ -111,8 +108,6 @@ const createCamp = async (req,res,next) => {
     }).send()
     const coordinates = mbReq.body.features[0].geometry
     campData.geometry = coordinates
-    console.log(campData)
-    console.log(coordinates)
     const userToUpdate = await User.findById(req.user._id)
     const creator = req.user._id.toString()
     campData.creator = creator

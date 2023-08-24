@@ -2,9 +2,7 @@
 if(process.env.NODE_env !=="production"){
     require('dotenv').config()
 }
-console.log(process.env.cloudinaryCloudName)
-console.log(process.env.cloudinaryAPIKey)
-console.log(process.env.cloudinarySecret)
+const port = 3000
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -133,6 +131,6 @@ app.use((err, req,res,next)=>{
     }
 })
 
-app.listen(3000, ()=> {
-    console.log('Listening on the port 3000')
+app.listen(port, "0.0.0.0", () =>{
+    console.log("I am watching you")
 })
