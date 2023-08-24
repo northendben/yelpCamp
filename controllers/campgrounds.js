@@ -91,6 +91,8 @@ const updateCampImages = async (req,res) => {
     const {id} = req.params
     const foundCampground = await Campground.findById(id)
     const images = req.files.map((file) => ({filename: file.filename, url: file.path}))
+    console.log('here')
+    console.log(images)
     foundCampground.images.push(...images)
     await foundCampground.save()
     req.flash('successMessage', 'Images added')

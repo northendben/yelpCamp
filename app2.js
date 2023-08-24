@@ -2,7 +2,9 @@
 if(process.env.NODE_env !=="production"){
     require('dotenv').config()
 }
+console.log(process.env.cloudinaryCloudName)
 console.log(process.env.cloudinaryAPIKey)
+console.log(process.env.cloudinarySecret)
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
