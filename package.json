@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app2.js"
+  },
   "dependencies": {
     "@mapbox/mapbox-sdk": "^0.15.2",
     "cloudinary": "^1.36.2",
