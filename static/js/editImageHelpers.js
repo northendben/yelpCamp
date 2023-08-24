@@ -40,7 +40,6 @@ async function deleteSelected () {
         window.location.href = `/campgrounds/${idToUpdate}/edit/images`
     } else {
         const res = await req.json()
-        console.log(res)
         errorForm(res.status,res.message)
     }
 }
