@@ -125,6 +125,8 @@ app.use((err, req,res,next)=>{
     if(err.render === true){
         res.render('errors/errors', {error: err, templateBuilder: templateBuilder})
     } else {
+        console.log('hitting here ben')
+        console.log(err)
         res.status(err.status).send(JSON.stringify(err.message))
     }
 })
