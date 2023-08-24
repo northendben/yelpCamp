@@ -1,6 +1,7 @@
 const informPasswordError = function () {
-    const passwordErrorMessage = document.querySelector('#password').nextElementSibling
-    passwordErrorMessage.display='block'
+    const passwordErrorMessage = document.querySelector('#password')
+    passwordErrorMessage.classList.add('is-invalid')
+    passwordErrorMessage.nextElementSibling.style.display='block'
 }
 
 async function submitFormData (form) {
