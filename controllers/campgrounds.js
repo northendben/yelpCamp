@@ -78,7 +78,6 @@ const deleteCamp = async (req,res) => {
 const deleteCampImages = async (req,res) => {
     const {id} = req.params
     const images = req.body
-    console.log(images)
     // const imagesToDelete = images.map(image => new mongoose.Types.ObjectId(image))  note: used this with objectIds. switched to fn for cloudinary
     for(let image of images){
         await cloudinary.v2.uploader.destroy(`${image}`)
